@@ -1,12 +1,13 @@
+import 'dart:convert';
+
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:harmony/Task.dart';
 import 'package:harmony/const/colors.dart';
 import 'loading_screen.dart';
-import 'package:tflite_text_classification/tflite_text_classification.dart';
+import 'package:http/http.dart';
 class TaskPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _TaskPageState();
@@ -172,7 +173,11 @@ The task is
                                         ),
                                         onPressed: (){
                                           setState(() {
-                                            example(initprompt + new_task,new_task);
+                                            isLoading = true;
+                                          });
+                                          getSchedule("running cycling done");
+                                          setState(() {
+                                            isLoading = false;
                                           });
                                           Navigator.of(context, rootNavigator: true).pop('dialog');
                                           FocusManager.instance.primaryFocus?.unfocus();
@@ -329,17 +334,11 @@ The task is
     );
   }
 
-  applymodel (String task) async{
-    var result = await TfliteTextClassification().classifyText(
-        params: TextClassifierParams(
-            text: task,
-            modelType: ModelType.wordVec,
-            modelPath: "assets/model.tflite",
-            delegate: 0));
-    setState(() {
-      priority[int.parse(result.toString())].add(new Task(task,false));
-    });
-
+  }
+  Future<void> getSchedule(String tasks) async{
+      var url = Uri.parse("your host link/get-schedule?tasks=${tasks}");
+      Response response = await get(url);
+      print(response.body);
   }
   // void _addTaskPressed() {
   //   // Handle add task button press
@@ -383,4 +382,3 @@ The task is
   // }
 
 
-}
