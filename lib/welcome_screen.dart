@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harmony/const/colors.dart';
 import 'package:harmony/home_screen.dart';
 import 'package:rive/rive.dart';
 import 'package:flutter/src/painting/gradient.dart' as gradient;
@@ -42,16 +43,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Container(
             decoration: BoxDecoration(
               gradient: gradient.LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 128, 95, 155)!,
-                  Color.fromARGB(255, 194, 173, 209)!
-                ],
+                colors: [pColor, sColor],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  color: Color.fromARGB(255, 47, 93, 89),
+                  color: aColor,
                   blurRadius: 50.0,
                   spreadRadius: 10.0,
                 ),
@@ -91,7 +89,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               width: 200.0,
               height: 75.0,
               child: FloatingActionButton(
-                backgroundColor: Color.fromARGB(255, 194, 173, 209),
+                backgroundColor: sColor,
                 shape: ShapeBorder.lerp(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100.0),
@@ -111,7 +109,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Text(
                   greeting,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: aColor,
                     fontSize: 18.0,
                     fontWeight: FontWeight.w600,
                   ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -9,10 +8,7 @@ class HomeScreen extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {
-              // Action to add a new task
-            },
-          ),
+            onPressed: () {            },),
         ],
       ),
       body: Container(
